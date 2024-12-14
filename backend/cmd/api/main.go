@@ -1,18 +1,17 @@
 package main
 
-import(
+import (
+	"github.com/gabrielteiga/fit4u/backend/cmd/api/routes"
 	"github.com/gofiber/fiber/v2"
 )
 
-func main(){
+func main() {
 	app := fiber.New()
-	
-	app.Get("/ping", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"success": true,
-			"message": "pong",
-		})
-	})
-
+	initRouter(app)
 	app.Listen(":8080")
+}
+
+func initRouter(app *fiber.App) {
+	router := routes.NewRouter(app)
+	router.Init()
 }
